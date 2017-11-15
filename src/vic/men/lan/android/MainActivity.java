@@ -22,7 +22,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 
 public class MainActivity extends Activity implements OnClickListener {
-    
+
     Button leersd;
     Button escribirsd;
     TextView textView;
@@ -30,7 +30,7 @@ public class MainActivity extends Activity implements OnClickListener {
     //con estos atributos controlamos el estado de la SD
     boolean sdDisponible = false;
     boolean sdAccesoEscritura = false;
-    
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,7 +47,7 @@ public class MainActivity extends Activity implements OnClickListener {
 
         // Código que me comprueba si existe SD y si puedo escribir o no
         String estado = Environment.getExternalStorageState();
-        
+
         if (estado.equals(Environment.MEDIA_MOUNTED)) {
             sdDisponible = true;
             sdAccesoEscritura = true;
@@ -58,17 +58,17 @@ public class MainActivity extends Activity implements OnClickListener {
             sdDisponible = false;
             sdAccesoEscritura = false;
         }
-        
+
     }//fin onCreate()
 
     @Override
     public void onClick(View v) {
-        
+
         switch (v.getId()) {
             //----->ESTOS SON LOS CASOS QUE NOS INTERESAN <------
-            case (R.id.leersd): //escribir en SD
+            case (R.id.leersd): //leer SD
                 if (sdDisponible) {
-                    
+
                     FileInputStream fis = null;
                     DataInputStream entrada = null;
                     String contenido_archivo = ""; //almacenará contenido total del archivo
@@ -77,7 +77,7 @@ public class MainActivity extends Activity implements OnClickListener {
                         //Apuntamos a dirección de la SD
                         File ruta_sd = Environment.getExternalStorageDirectory();
                         File f = new File(ruta_sd.getAbsolutePath(), "ficherosd1.txt");
-                        
+
                         fis = new FileInputStream(f);
                         entrada = new DataInputStream(fis);
                         int n = 0; //irá leyendo int por int el archivo
@@ -106,29 +106,29 @@ public class MainActivity extends Activity implements OnClickListener {
                             System.out.println(e.getMessage());
                         }
                     }
-                    
+
                     textView.setText(contenido_archivo);
-                    
+
                 }
-                
+
                 break;
-            case (R.id.escribirsd):
+            case (R.id.escribirsd): //Escribir en SD
                 if (sdAccesoEscritura && sdDisponible) { //si la SD está disponible y podemos escribir
 
                     FileOutputStream fos = null;
                     DataOutputStream salida = null;
-                    
+
                     try {
                         File ruta_sd = Environment.getExternalStorageDirectory();
                         File f = new File(ruta_sd.getAbsolutePath(), "ficherosd1.txt");
-                        
+
                         fos = new FileOutputStream(f);
                         salida = new DataOutputStream(fos);
-                        
+
                         for (int i = 0; i < 10; i++) {
                             salida.writeInt(i + 1); //se escribe el número entero en el fichero
                         }
-                        
+
                         salida.close();
                     } catch (FileNotFoundException e) {
                         System.out.println(e.getMessage());
@@ -146,10 +146,10 @@ public class MainActivity extends Activity implements OnClickListener {
                             System.out.println(e.getMessage());
                         }
                     }
-                    
+
                     break;
                 }
-            
+
         }//fin switch
 
     }//fin onClick
