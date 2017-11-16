@@ -19,7 +19,7 @@ public class ArchivoBinario {
 
     private File archivo; //manejará fichero
     private TarjetaSD infoSD; //objeto que nos informará del estado de la SD
-    private String contenido_archivo;
+    private String contenido_archivo; //almacena el contenido del fichero como string
 
     //flujos que permitirán leer o escribir sobre el archivo binario
     private FileInputStream fis;
@@ -45,6 +45,9 @@ public class ArchivoBinario {
         salida = null;
         fis = new FileInputStream(archivo);
         entrada = new DataInputStream(fis);
+
+        //AQUÍ LLENAMOS CON LOS VALORES DESEADOS
+        Llena(10);
     }
 
     /**
@@ -64,6 +67,9 @@ public class ArchivoBinario {
         salida = new DataOutputStream(fos);
         fis = new FileInputStream(archivo);
         entrada = new DataInputStream(fis);
+
+        //AQUÍ LLENAMOS CON LOS VALORES DESEADOS
+        Llena(10);
     }
 
     /**
@@ -76,19 +82,121 @@ public class ArchivoBinario {
     public ArchivoBinario(File archivo) throws FileNotFoundException {
 
         infoSD = new TarjetaSD();
-        this.archivo = new File(archivo.getPath(), archivo.getName()); //nombre por default del archivo
+        this.archivo = new File(infoSD.getRuta(), archivo.getName()); //nombre por default del archivo
         contenido_archivo = ""; //por default no tiene contenido
         //inicializamos flujos
         fis = new FileInputStream(archivo);
         entrada = new DataInputStream(fis);
         fos = new FileOutputStream(archivo);
         salida = new DataOutputStream(fos);
+
+        //AQUÍ LLENAMOS CON LOS VALORES DESEADOS
+        Llena(10);
     }
 
     //Métodos de archivos binarios
     /**
-     * Llena el fichero con n enteros binarios. Devuelve true si se llenó
-     * correctamente o false si hubo alguna excepción.
+     * Llena fichero con int del 1-100.
+     *
+     * @return boolean
+     */
+    public boolean Llena() {
+
+        boolean seLlenoCorrectamente = false; //informará si el fichero binario se llenó correctamente con un 'true', si devuelve 'false' es que hubo alguna excepción
+
+        fos = null;
+        salida = null;
+
+        //si tenemos SD disponible y podemos escribir sobre ella
+        if (infoSD.TieneSD() && infoSD.PuedeEscribir()) {
+            try {
+
+                fos = new FileOutputStream(archivo);
+                salida = new DataOutputStream(fos);
+
+                //Escribimos 1-100 en el fichero
+                for (int i = 0; i < 100; i++) {
+                    salida.writeInt((i + 1)); //escribe del 1-100
+                }
+
+                salida.close(); //cerramos flujo de escritura
+                seLlenoCorrectamente = true; //sólo si se ejecuta correctamente, devolvemos true
+
+            } catch (FileNotFoundException e) {
+                System.out.println(e.getMessage());
+            } catch (IOException e) {
+                System.out.println(e.getMessage());
+            } finally {
+                //Cerramos flujos 
+                try {
+                    if (fos != null) {
+                        fos.close();
+                    }
+                    if (salida != null) {
+                        salida.close();
+                    }
+                } catch (IOException e) {
+                    System.out.println(e.getMessage());
+                }
+            }
+        }
+
+        return seLlenoCorrectamente;
+    }
+
+    /**
+     * Llena fichero con int del 1-n recibido.
+     *
+     * @param cantidad_enteros
+     * @return
+     */
+    public boolean Llena(int cantidad_enteros) {
+
+        boolean seLlenoCorrectamente = false; //informará si el fichero binario se llenó correctamente con un 'true', si devuelve 'false' es que hubo alguna excepción
+
+        fos = null;
+        salida = null;
+
+        //si tenemos SD disponible y podemos escribir sobre ella
+        if (infoSD.TieneSD() && infoSD.PuedeEscribir()) {
+            try {
+
+                fos = new FileOutputStream(archivo);
+                salida = new DataOutputStream(fos);
+
+                //Escribimos 1-100 en el fichero
+                for (int i = 0; i < cantidad_enteros; i++) {
+                    salida.writeInt((i + 1)); //escribe del 1-100
+                }
+
+                salida.close(); //cerramos flujo de escritura
+                seLlenoCorrectamente = true; //sólo si se ejecuta correctamente, devolvemos true
+
+            } catch (FileNotFoundException e) {
+                System.out.println(e.getMessage());
+            } catch (IOException e) {
+                System.out.println(e.getMessage());
+            } finally {
+                //Cerramos flujos 
+                try {
+                    if (fos != null) {
+                        fos.close();
+                    }
+                    if (salida != null) {
+                        salida.close();
+                    }
+                } catch (IOException e) {
+                    System.out.println(e.getMessage());
+                }
+            }
+        }
+
+        return seLlenoCorrectamente;
+    }
+
+    /**
+     * Llena el fichero con n aleatorios enteros de forma binaria. Devuelve true
+     * si se llenó correctamente o false si hubo alguna excepción.
      *
      * @param cantidad_de_aleatorios
      * @return
@@ -154,6 +262,7 @@ public class ArchivoBinario {
 
         fis = null;
         entrada = null;
+        contenido_archivo = "";
 
         String contenido_formateado = "";
         int n;
@@ -165,8 +274,8 @@ public class ArchivoBinario {
             //LEEMOS ARCHIVO
             while (true) {
                 n = entrada.readInt();  //se lee  un entero del fichero
+                contenido_archivo = contenido_archivo + n; //
                 contenido_formateado = contenido_formateado + n + " - ";
-                System.out.println(n);  //se muestra en pantalla
             }
         } catch (FileNotFoundException e) {
             System.out.println(e.getMessage());
@@ -208,24 +317,50 @@ public class ArchivoBinario {
     public void setContenido_archivo(String contenido_archivo) {
         this.contenido_archivo = contenido_archivo;
     }
+
+    public FileInputStream getFis() {
+        return fis;
+    }
+
+    public void setFis(FileInputStream fis) {
+        this.fis = fis;
+    }
+
+    public DataInputStream getEntrada() {
+        return entrada;
+    }
+
+    public void setEntrada(DataInputStream entrada) {
+        this.entrada = entrada;
+    }
+
+    public FileOutputStream getFos() {
+        return fos;
+    }
+
+    public void setFos(FileOutputStream fos) {
+        this.fos = fos;
+    }
+
+    public DataOutputStream getSalida() {
+        return salida;
+    }
+
+    public void setSalida(DataOutputStream salida) {
+        this.salida = salida;
+    }
+
+    public long getTamañoArchivo() {
+        return this.archivo.length();
+    }
+
+    public File getArchivo() {
+        return archivo;
+    }
+
+    public void setArchivo(File archivo) {
+        this.archivo = archivo;
+    }
+    
+    
 }//fin class ArchivoBinario
-
-/**
- * DESPUÉS VEMOS ESTA ALTERNATIVA!!! Clase que hereda de archivoBinario y
- * servirá para comparar 2 ficheros binarios. Hereda de clase ArchivoBinario por
- * tanto reutiliza la mayoría de elemnetos de clase Padre y
- *
- * @author WM
- */
-
-/*
- class ComparaArchivosBinarios extends ArchivoBinario {
-
-    
- public ComparaArchivosBinarios() {
- super();
- }
-
-    
- }
- */
