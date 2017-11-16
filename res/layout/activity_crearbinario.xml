@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--ScrollView por si no nos da tiempo de acomodar visualmente al girar la pantalla, 
+se pueda visualizar todo el calendario(sólo tiene que encerrar a todos los elementos)-->
+<ScrollView   
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+>
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_centerVertical="true">
+
+       
+            <!--Muestra mensaje1 --> 
+            <TextView
+                android:id="@+id/textView_mensaje1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/TextColor2"
+                android:text="@string/mensaje41"/>
+        
+            <!--Sección de seleccionar archivos binarios-->
+            <TextView
+                android:id="@+id/textView_mensaje21"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/TextColor"
+                android:text="@string/mensaje42"/>
+        
+            <!--Aquí se imprimirá el nombre del fichero1-->
+            <EditText
+                android:id="@+id/edittext_nombreArchivo"
+                android:layout_width="fill_parent" 
+                android:layout_height="wrap_content" 
+                android:text=""
+            />
+        
+            <TextView
+                android:id="@+id/textView_mensaje22"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/TextColor"
+                android:text="@string/mensaje43"/>
+        
+            <!--Aquí se imprimirá el nombre del fichero1-->
+            <EditText
+                android:id="@+id/edittext_datosArchivo"
+                android:layout_width="fill_parent" 
+                android:layout_height="wrap_content" 
+                android:text=""
+            />
+        
+            <!--botón que manda a crear fichero-->       
+            <Button
+                android:id="@+id/boton_creaFichero"
+                android:layout_width="fill_parent" 
+                android:layout_height="wrap_content" 
+                android:text="@string/boton_creaFichero"
+            />
+        
+        
+            <!--Muestra mensaje1 --> 
+            <TextView
+                android:id="@+id/textView_resultadosCrear"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/TextColor2"
+                android:text=""/>
+        
+       
+        
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>
+

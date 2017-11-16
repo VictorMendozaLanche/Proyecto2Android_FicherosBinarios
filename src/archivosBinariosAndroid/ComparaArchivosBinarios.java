@@ -125,7 +125,29 @@ public class ComparaArchivosBinarios {
         return true; //si no encuentra ningun valor diferente, devuelve 'true'
     }
 
-    //->Métodos que tienen detalles(aún no están terminados)<-
+    //necesitamos más métodos!!!!
+    
+    //getters y setters
+    public ArchivoBinario getFichero1() {
+        return fichero1;
+    }
+
+    public void setFichero1(ArchivoBinario fichero1) {
+        this.fichero1 = fichero1;
+    }
+
+    public ArchivoBinario getFichero2() {
+        return fichero2;
+    }
+
+    public void setFichero2(ArchivoBinario fichero2) {
+        this.fichero2 = fichero2;
+    }
+
+}//fin class ComparaArchivosBinarios
+
+/*
+//->Métodos que tienen detalles(aún no están terminados)<-
     public int cuentaIguales() throws FileNotFoundException {
 
         //obtenemos el contenido de los ficheros
@@ -301,22 +323,4 @@ public class ComparaArchivosBinarios {
             return false;
         }
     }
-
-    //getters y setters
-    public ArchivoBinario getFichero1() {
-        return fichero1;
-    }
-
-    public void setFichero1(ArchivoBinario fichero1) {
-        this.fichero1 = fichero1;
-    }
-
-    public ArchivoBinario getFichero2() {
-        return fichero2;
-    }
-
-    public void setFichero2(ArchivoBinario fichero2) {
-        this.fichero2 = fichero2;
-    }
-
-}//fin class ComparaArchivosBinarios
+*/

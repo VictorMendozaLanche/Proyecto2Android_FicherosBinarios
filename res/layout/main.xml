@@ -1,40 +1,156 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="fill_parent"
-              android:layout_height="fill_parent">
+<!--ScrollView por si no nos da tiempo de acomodar visualmente al girar la pantalla, 
+se pueda visualizar todo el calendario(sólo tiene que encerrar a todos los elementos)-->
+<ScrollView   
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+>
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                  android:orientation="vertical"
+                  android:layout_width="fill_parent"
+                  android:layout_height="fill_parent">
 
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_centerVertical="true">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_centerVertical="true">
 
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="..."/>
+            <!--Sección de presentación de la app-->
+            <LinearLayout
+                android:id="@+id/contenedor_presentacion"
+                android:orientation="vertical"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent">        
+            
+                <!--Muestra la presentación de la app: Descripción y funcionamiento-->
+                <TextView
+                    android:id="@+id/textView_mensaje0"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/TextColor2"
+                    android:text="@string/mensaje0"/>
+                <TextView
+                    android:id="@+id/textView_presentacion"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/TextColor"
+                    android:text="@string/presentacionApp"/>
+            </LinearLayout>
+       
+        
+            <!--Sección de botones para crear y/o editar ficheros binarios-->
+            <!--Muestra mensaje01 --> 
+            <TextView
+                android:id="@+id/textView_mensaje01"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/TextColor2"
+                android:text="@string/mensaje01"/>
+        
+            <Button
+                android:id="@+id/boton_crearFicherosBinarios"
+                android:layout_width="fill_parent" 
+                android:layout_height="wrap_content" 
+                android:text="@string/boton_crear"
+            
+            />
+        
+            <Button
+                android:id="@+id/boton_modificarFicherosBinarios"
+                android:layout_width="fill_parent" 
+                android:layout_height="wrap_content" 
+                android:text="@string/boton_modificar"
+            />
         
         
-        <Button
-            android:id="@+id/leersd"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Leer SD"/>
+            <!--Muestra mensaje1 --> 
+            <TextView
+                android:id="@+id/textView_mensaje1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/TextColor2"
+                android:text="@string/mensaje1"/>
         
-        <Button
-            android:id="@+id/escribirsd"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Leer fichero2"/>
+            <!--Sección de seleccionar archivos binarios-->
+            <TextView
+                android:id="@+id/textView_mensaje21"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/TextColor"
+                android:text="@string/mensaje21"/>
         
-        <Button
-            android:id="@+id/boton_comparaArchivosBinarios"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Compara archivos binarios!!!"/>
+            <!--Aquí se imprimirá el nombre del fichero1-->
+            <EditText
+                android:id="@+id/edittext_nombreBinario1"
+                android:layout_width="fill_parent" 
+                android:layout_height="wrap_content" 
+                android:text=""
+            />
         
+            <Button
+                android:id="@+id/boton_buscarBinario1"
+                android:layout_width="fill_parent" 
+                android:layout_height="wrap_content" 
+                android:text="@string/boton_buscar"
+            />
+        
+            <!--botón que manda a buscar fichero1-->
+        
+            <TextView
+                android:id="@+id/textView_mensaje22"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/TextColor"
+                android:text="@string/mensaje22"/>
+        
+            <!--Aquí se imprimirá el nombre del fichero1-->
+            <EditText
+                android:id="@+id/edittext_nombreBinario2"
+                android:layout_width="fill_parent" 
+                android:layout_height="wrap_content" 
+                android:text=""
+            />
+        
+            <!--botón que manda a buscar fichero2-->
+            <Button
+                android:id="@+id/boton_buscarBinario2"
+                android:layout_width="fill_parent" 
+                android:layout_height="wrap_content" 
+                android:text="@string/boton_buscar2"
+            />
+        
+        
+            <!--Muestra mensaje1 --> 
+            <TextView
+                android:id="@+id/textView_mensaje3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/TextColor2"
+                android:text="@string/mensaje3"/>
+        
+            <!--botón que manda a buscar fichero2-->
+            <Button
+                android:id="@+id/boton_compararAhoraSi"
+                android:layout_width="fill_parent" 
+                android:layout_height="wrap_content" 
+                android:text="@string/boton_comparar"
+            />
+        
+            <!--EditText que muestra resultados de la comparación, el cual no se puede editar-->
+            <EditText
+                android:id="@+id/edittext_resultadosComparacion"
+                android:layout_width="fill_parent" 
+                android:layout_height="wrap_content" 
+                android:text=""
+                android:textColor="@color/TextColor"
+            
+                android:clickable="false" 
+                android:cursorVisible="false" 
+                android:focusable="false" 
+                android:focusableInTouchMode="false"/>
+        
+        </LinearLayout>
     </LinearLayout>
-</LinearLayout>
-
+</ScrollView>

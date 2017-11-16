@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--ScrollView por si no nos da tiempo de acomodar visualmente al girar la pantalla, 
+se pueda visualizar todo el calendario(sólo tiene que encerrar a todos los elementos)-->
+<ScrollView   
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+>
+    
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_centerVertical="true">
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="..."/>
+        
+        
+            <Button
+                android:id="@+id/leersd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Leer SD"/>
+        
+            <Button
+                android:id="@+id/escribirsd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Leer fichero2"/>
+        
+            <Button
+                android:id="@+id/boton_comparaArchivosBinarios"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Compara archivos binarios!!!"/>
+        
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>
+

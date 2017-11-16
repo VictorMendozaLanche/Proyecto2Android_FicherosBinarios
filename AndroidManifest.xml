@@ -17,8 +17,39 @@
                  android:icon="@drawable/ic_launcher"
                  android:theme="@style/AppTheme">
         
+        <!--Activity inicial y principal, aquí realizaremos la comparación de ficheros-->
         <activity android:name="MainActivity"
                   android:label="@string/app_name">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" 
+                          android:theme="@android:style/Theme.Holo"/>
+            </intent-filter>
+        </activity>
+        
+        <!--Activity que se encarga de abrir ficheros de la path de la SD-->
+        <activity android:name="Activity_ManipulaFicheros"
+                  android:label="@string/titulo2">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" 
+                          android:theme="@android:style/Theme.Holo"/>
+            </intent-filter>
+        </activity>
+        
+        <!--Activity que se encarga de manipular ficheros: crearlos, modificarlos, etc-->
+        <activity android:name="Activity_SeleccionaFichero"
+                  android:label="@string/titulo3">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" 
+                          android:theme="@android:style/Theme.Holo"/>
+            </intent-filter>
+        </activity>
+        
+        <!--Activity que se encarga de manipular ficheros: crearlos, modificarlos, etc-->
+        <activity android:name="Activity_CrearFicheros"
+                  android:label="@string/titulo4">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" 

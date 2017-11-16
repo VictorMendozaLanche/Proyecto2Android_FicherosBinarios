@@ -1,4 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">MainActivity</string>
+    <string name="app_name">VicMLComparator of binary files 1.0</string>
+    <string name="titulo2">Manipula ficheros binarios</string>
+    <string name="titulo3">Selecciona fichero de la SD</string>
+    <string name="titulo4">Crear ficheros binarios</string>
+    
+    <!--Mensaje de presentación-->
+    <string name="presentacionApp">Esta app permite manejar ficheros binarios en memoria externa. 
+        Primero debes crearlos (clic en Manipular Ficheros), luego debes abrirlos(Abrir...)
+        y finalmente clic en Comparar. Long tap para ocultar este mensaje forever.</string>
+        
+    <!--Mensajes informativos de los textView en la vista-->
+    <string name="mensaje0">Presentación</string>
+    <string name="mensaje01">Crear y/o modificar archivos binarios</string>
+    <string name="mensaje1">Archivos binarios a comparar</string>
+    <string name="mensaje21">Binario 1:</string>
+    <string name="mensaje22">Binario 2:</string>
+    <string name="mensaje3">Resultados de la comparación:</string>
+    <string name="mensaje41">Ingresa los datos solicitados:</string>
+    <string name="mensaje42">Nombre del archivo:</string>
+    <string name="mensaje43">Contenido del fichero (enteros separados por espacios): </string>
+    
+    <string name="boton_buscar">Abrir de SD...</string>
+    <string name="boton_buscar2">Abrir de SD...</string>
+    <string name="boton_crear">Crear binarios</string>
+    <string name="boton_creaFichero">Crear!!!</string>
+    <string name="boton_modificar">Modificar binarios</string>
+    <string name="boton_comparar">Comparar archivos actuales</string>
+    
+    <!--Colores de los controles-->
+    <color name="TextColor">#00427E</color>
+    <color name="TextColor2">#ff0000</color>
+    
+        
+        
 </resources>
