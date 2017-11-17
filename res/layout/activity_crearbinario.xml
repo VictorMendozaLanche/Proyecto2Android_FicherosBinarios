@@ -34,7 +34,7 @@ se pueda visualizar todo el calendario(sólo tiene que encerrar a todos los elem
                 android:textColor="@color/TextColor"
                 android:text="@string/mensaje42"/>
         
-            <!--Aquí se imprimirá el nombre del fichero1-->
+            <!--Aquí se leerá el nombre del fichero1-->
             <EditText
                 android:id="@+id/edittext_nombreArchivo"
                 android:layout_width="fill_parent" 
@@ -43,12 +43,42 @@ se pueda visualizar todo el calendario(sólo tiene que encerrar a todos los elem
                 android:hint="Archivo.txt"
             />
         
-            <!--botón que manda a crear fichero-->       
-            <Button
-                android:id="@+id/boton_creaFichero"
+            <TextView
+                android:id="@+id/textView_mensaje22"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/TextColor"
+                android:text="@string/mensaje43"
+                
+            />
+        
+            <!--Aquí se imprimirá el nombre del fichero1-->
+            <EditText
+                android:id="@+id/edittext_datosArchivo"
                 android:layout_width="fill_parent" 
                 android:layout_height="wrap_content" 
-                android:text="@string/boton_creaFichero"
+                android:text=""
+               
+            />
+        
+            <!--botón que manda a crear fichero-->       
+            <Button
+                android:id="@+id/boton_creaConDatosIngresados"
+                android:layout_width="fill_parent" 
+                android:layout_height="wrap_content" 
+                android:text="@string/boton_creaConDatosIngresados"
+            />
+            <Button
+                android:id="@+id/boton_creaFicheroAleatorio"
+                android:layout_width="fill_parent" 
+                android:layout_height="wrap_content" 
+                android:text="@string/boton_creaFicheroAleatorio"
+            />            
+            <Button
+                android:id="@+id/boton_creaFicheroHastaDiez"
+                android:layout_width="fill_parent" 
+                android:layout_height="wrap_content" 
+                android:text="@string/boton_creaFicheroHastaDiez"
             />
         
             <!--Muestra resultados de creación de ficheross --> 
@@ -58,27 +88,6 @@ se pueda visualizar todo el calendario(sólo tiene que encerrar a todos los elem
                 android:layout_height="wrap_content"
                 android:textColor="@color/TextColor2"
                 android:text=""/>
-            
-            <!--Temporalmente ocultamos los controles para agregar elementos-->
-            <TextView
-                android:id="@+id/textView_mensaje22"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/TextColor"
-                android:text="@string/mensaje43"
-                android:visibility="invisible"
-            />
-        
-            <!--Aquí se imprimirá el nombre del fichero1-->
-            <EditText
-                android:id="@+id/edittext_datosArchivo"
-                android:layout_width="fill_parent" 
-                android:layout_height="wrap_content" 
-                android:text=""
-                android:visibility="invisible"
-            />
-        
-       
         
         </LinearLayout>
     </LinearLayout>

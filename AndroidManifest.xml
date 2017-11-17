@@ -27,15 +27,6 @@
             </intent-filter>
         </activity>
         
-        <!--Activity que se encarga de abrir ficheros de la path de la SD-->
-        <activity android:name="Activity_ManipulaFicheros"
-                  android:label="@string/titulo2">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" 
-                          android:theme="@android:style/Theme.Holo"/>
-            </intent-filter>
-        </activity>
         
         <!--Activity que se encarga de manipular ficheros: crearlos, modificarlos, etc-->
         <activity android:name="Activity_SeleccionaFichero"

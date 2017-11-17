@@ -195,7 +195,7 @@ public class MainActivity extends Activity implements OnClickListener {
                 visualizaToast("Vamos a crear ficheros binarios...", 0);
                 break;
             case (R.id.boton_buscarBinario1):
-                visualizaToast("Abre fichero1(previamente creado) de " + comparaArchivos.getFichero1().getInfoSD().getRuta() + " ...", 0);
+                visualizaToast("Abre fichero1(previamente creado) de \n" + comparaArchivos.getFichero1().getInfoSD().getRuta() + " ...", 0);
 
                 archivoSeleccionado = 1; //indicamos que seleccionamos el fichero1
                 /*
@@ -213,7 +213,7 @@ public class MainActivity extends Activity implements OnClickListener {
                 break;
 
             case (R.id.boton_buscarBinario2):
-                visualizaToast("Abre fichero2(previamente creado) de " + comparaArchivos.getFichero1().getInfoSD().getRuta() + " ...", 0);
+                visualizaToast("Abre fichero2(previamente creado) de \n" + comparaArchivos.getFichero1().getInfoSD().getRuta() + " ...", 0);
 
                 archivoSeleccionado = 2; //indicamos que seleccionamos el fichero2
                 /*
@@ -317,7 +317,7 @@ public class MainActivity extends Activity implements OnClickListener {
         if (comparaArchivos.sonIguales() == true) {
             iguales = "\n\t----->LOS FICHEROS SON IGUALES<-----";
         } else {
-            iguales = "\t----->LOS FICHEROS SON DIFENTES<-----";
+            iguales = "\t----->LOS FICHEROS SON DIFERENTES<-----";
         }
         resultado += iguales;
 

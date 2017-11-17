@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">VicMLComparator of binary files 1.0</string>
+    <string name="app_name">VicComparator of binary files 1.0</string>
     <string name="titulo2">Manipula ficheros binarios</string>
     <string name="titulo3">Selecciona fichero de la SD</string>
     <string name="titulo4">Crear ficheros binarios</string>
@@ -24,7 +24,9 @@
     <string name="boton_buscar">Abrir de SD...</string>
     <string name="boton_buscar2">Abrir de SD...</string>
     <string name="boton_crear">Crear binarios</string>
-    <string name="boton_creaFichero">Crear con enteros aleatorios</string>
+    <string name="boton_creaFicheroAleatorio">Crear con 10 enteros aleatorios</string>
+    <string name="boton_creaConDatosIngresados">Crear con datos ingresados</string>
+    <string name="boton_creaFicheroHastaDiez">Crear con datos 1-10</string>
     <string name="boton_modificar">Modificar binarios</string>
     <string name="boton_comparar">Comparar archivos actuales</string>
     
