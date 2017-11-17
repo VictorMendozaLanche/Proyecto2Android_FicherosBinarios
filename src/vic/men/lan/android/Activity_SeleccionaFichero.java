@@ -10,10 +10,15 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
+import archivosBinariosAndroid.ArchivoBinario;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Activity_SeleccionaFichero extends ListActivity {
 
@@ -70,24 +75,32 @@ public class Activity_SeleccionaFichero extends ListActivity {
             intent.putExtra("path", filename);
             startActivity(intent);
 
-            Toast.makeText(this, filename + " es un directorio, debes seleccionar archivo ", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, filename + " es un directorio, debes seleccionar un archivo(.txt o .dat) ", Toast.LENGTH_SHORT).show();
         } else {
-            //Toast.makeText(this, filename + " es un archivo, vamos a retornar su nombre", Toast.LENGTH_LONG).show();
-
-            /*
-             3. Cuando pulsemos sobre un elemento, se va a crear un Intent,
-             el cual tendrá el String que hemos seleccionado.
-             Una vez esté cargado, vamos a llamar al método setResult(), 
-             el cual tiene la constante RESULT_OK, es decir, que el resultado que enviamos es correcto. 
-             Si por el contrario quisieramos retroceder a la actividad anterior sin enviar nada, podríamos establecer RESULT_CANCELLED. 
-             Como segundo argumento, recibe el Intent con los datos que hemos cargado en el. Una vez hecho esto, llamamos al método finish(),
-             el cual finalizará la actividad y volverá a la primera actividad.
-             */
-            String nombreArchivo = filename; //Obtenemos el nombre del archivo archivo seleccionamos
-            Intent data = new Intent(); //Creamos el intent
-            data.setData(Uri.parse(nombreArchivo)); //establecemos el dato a devolver
-            setResult(RESULT_OK, data); //devolvemos
+            File fichero1 = new File(filename);
+            //Toast.makeText(this, "Tamaño fichero1: " + fichero1.length(), 1).show();
+            Intent data = new Intent();
+            data.setData(Uri.parse(filename));
+            setResult(RESULT_OK, data);
             finish();
+
         }
     }
 }
+
+/*
+ /*
+ 3. Cuando pulsemos sobre un elemento, se va a crear un Intent,
+ el cual tendrá el String que hemos seleccionado.
+ Una vez esté cargado, vamos a llamar al método setResult(), 
+ el cual tiene la constante RESULT_OK, es decir, que el resultado que enviamos es correcto. 
+ Si por el contrario quisieramos retroceder a la actividad anterior sin enviar nada, podríamos establecer RESULT_CANCELLED. 
+ Como segundo argumento, recibe el Intent con los datos que hemos cargado en el. Una vez hecho esto, llamamos al método finish(),
+ el cual finalizará la actividad y volverá a la primera actividad.
+             
+ String nombreArchivo = filename; //Obtenemos el nombre del archivo archivo seleccionamos
+ Intent data = new Intent(); //Creamos el intent
+ data.setData(Uri.parse(nombreArchivo)); //establecemos el dato a devolver
+ setResult(RESULT_OK, data); //devolvemos
+ finish();
+ */

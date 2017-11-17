@@ -58,44 +58,48 @@ public class ArchivoBinario {
     }
 
     /**
-     * Crea archivo binario con ruta de la sd + "nombreArchivo" recibido. Además
-     * crea objeto que apunta a la info necesaria de la SD, así como inicializa
-     * los flujos
+     * Crea archivo binario con 'absolutePath' del archivo recibido. Además crea
+     * objeto que apunta a la info necesaria de la SD, así como inicializa los
+     * flujos
      *
      * @param nombreArchivo
      */
-    public ArchivoBinario(String nombreArchivo) throws FileNotFoundException {
+    public ArchivoBinario(String absolutePath) throws FileNotFoundException {
 
         infoSD = new TarjetaSD();
-        archivo = new File(infoSD.getRuta(), nombreArchivo); //nombre por default del archivo
+        archivo = new File(absolutePath); //nombre por default del archivo
+        Log.v(TAG, "Tamaño del archivo reinicializado -> "+archivo.length());
         contenido_archivo = ""; //por default no tiene contenido
         //inicializamos flujos
-        fos = new FileOutputStream(archivo);
+        /*fos = new FileOutputStream(archivo);
         salida = new DataOutputStream(fos);
         fis = new FileInputStream(archivo);
         entrada = new DataInputStream(fis);
-
+        */
         //AQUÍ LLENAMOS CON LOS VALORES DESEADOS
-        //Llena(10);
+        //llenaAleatorio(10);
     }
-    
 
     /**
-     * Crea archivo binario a partir de File recibido. Crea archivo binario con
-     * ruta de la sd + "nombreArchivo" recibido. Además crea objeto que apunta a
-     * la info necesaria de la SD, así como inicializa los flujos
+     * Crea archivo binario a partir del nombre del archivo File recibido. Crea
+     * archivo binario con ruta de la sd + "nombreArchivo" recibido. Además crea
+     * objeto que apunta a la info necesaria de la SD, así como inicializa los
+     * flujos
      *
      * @param archivo
      */
-    public ArchivoBinario(File archivo) throws FileNotFoundException {
+    public ArchivoBinario(File nombreArchivo) throws FileNotFoundException, IOException {
 
         infoSD = new TarjetaSD();
-        this.archivo = new File(infoSD.getRuta(), archivo.getName()); //nombre por default del archivo
+        this.archivo = new File(infoSD.getRuta(), nombreArchivo.toString()); //nombre por default del archivo
+        if (this.archivo.exists() == false) {
+            this.archivo.createNewFile();
+        }
         contenido_archivo = ""; //por default no tiene contenido
         //inicializamos flujos
-        fis = new FileInputStream(archivo);
+        fis = new FileInputStream(this.archivo);
         entrada = new DataInputStream(fis);
-        fos = new FileOutputStream(archivo);
+        fos = new FileOutputStream(this.archivo);
         salida = new DataOutputStream(fos);
 
         //AQUÍ LLENAMOS CON LOS VALORES DESEADOS
@@ -160,6 +164,7 @@ public class ArchivoBinario {
      */
     public boolean Llena(int cantidad_enteros) {
 
+        Log.v(TAG, "Llenando archivo llamado "+this.archivo.getName()+ " ...");
         boolean seLlenoCorrectamente = false; //informará si el fichero binario se llenó correctamente con un 'true', si devuelve 'false' es que hubo alguna excepción
 
         fos = null;
@@ -175,6 +180,7 @@ public class ArchivoBinario {
                 //Escribimos 1-100 en el fichero
                 for (int i = 0; i < cantidad_enteros; i++) {
                     salida.writeInt((i + 1)); //escribe del 1-100
+                    Log.v(TAG, "Se agregó -> "+(i+1)+ " ...");
                 }
 
                 salida.close(); //cerramos flujo de escritura
@@ -320,7 +326,7 @@ public class ArchivoBinario {
      */
     public String leerFichero() throws FileNotFoundException {
 
-        Log.v(TAG, "Vamos a leer el archivo " + this.getName() + " ...");
+        Log.v(TAG, "Vamos a leer el archivo " + this.archivo.getName() + " ...");
         fis = null;
         entrada = null;
         contenido_archivo = "";
@@ -329,22 +335,24 @@ public class ArchivoBinario {
         int n;
         try {
 
-            fis = new FileInputStream(archivo);
+            fis = new FileInputStream(this.archivo);
             entrada = new DataInputStream(fis);
 
             //LEEMOS ARCHIVO
             while (true) {
                 n = entrada.readInt();  //se lee  un entero del fichero
-                 Log.v(TAG, "Se leyó "+n+"...");
+                Log.v(TAG, "Se leyó " + n + "...");
                 contenido_archivo = contenido_archivo + n; //
                 contenido_formateado = contenido_formateado + n + " - ";
             }
         } catch (FileNotFoundException e) {
-            System.out.println(e.getMessage());
+            //System.out.println(e.getMessage());
+            Log.v(TAG, "ERROR VIC: " + e.getMessage());
         } catch (EOFException e) {
-            System.out.println("Fin de fichero");
+            //System.out.println("Fin de fichero");
+            Log.v(TAG, "Terminamos de leer el archivo: " + e.getMessage());
         } catch (IOException e) {
-            System.out.println(e.getMessage());
+            Log.v(TAG, "ERROR VIC: " + e.getMessage());
         } finally {
             try {
                 if (fis != null) {
@@ -354,7 +362,8 @@ public class ArchivoBinario {
                     entrada.close();
                 }
             } catch (IOException e) {
-                System.out.println(e.getMessage());
+                //System.out.println(e.getMessage());
+                Log.v(TAG, "ERROR VIC: " + e.getMessage());
             }
         }
 

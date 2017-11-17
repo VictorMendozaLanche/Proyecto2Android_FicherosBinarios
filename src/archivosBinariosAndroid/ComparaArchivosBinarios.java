@@ -31,7 +31,7 @@ public class ComparaArchivosBinarios {
      * @param fichero2
      * @throws FileNotFoundException
      */
-    public ComparaArchivosBinarios(File fichero1, File fichero2) throws FileNotFoundException {
+    public ComparaArchivosBinarios(File fichero1, File fichero2) throws FileNotFoundException, IOException {
         //La clase ArchivoBinario se encarga de crear los archivos en la path de la SD
         this.fichero1 = new ArchivoBinario(fichero1);
         this.fichero2 = new ArchivoBinario(fichero2);
@@ -135,11 +135,20 @@ public class ComparaArchivosBinarios {
     public void setFichero1(ArchivoBinario fichero1) {
         this.fichero1 = fichero1;
     }
+    
+    public void setFichero1(File fichero1) throws FileNotFoundException
+    {
+        this.fichero1 = new ArchivoBinario(fichero1.getAbsolutePath());
+    }
 
     public ArchivoBinario getFichero2() {
         return fichero2;
     }
 
+    public void setFichero2(File fichero2) throws FileNotFoundException
+    {
+        this.fichero2 = new ArchivoBinario(fichero2.getAbsolutePath());
+    }
     public void setFichero2(ArchivoBinario fichero2) {
         this.fichero2 = fichero2;
     }

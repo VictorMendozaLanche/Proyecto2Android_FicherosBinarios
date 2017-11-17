@@ -14,6 +14,7 @@ import android.widget.Toast;
 //Importamos clase que nos da acceso a la lógica de la app
 import archivosBinariosAndroid.ArchivoBinario;
 import archivosBinariosAndroid.ComparaArchivosBinarios;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -85,10 +86,10 @@ public class MainActivity extends Activity implements OnClickListener {
         //inicializamos archivos binarios y objeto comparador
         try {
             //por defecto se llenan con valores del 1-10 (esta instrucción viene en el contructor)
-            binario1 = new ArchivoBinario("binario1.txt");
-            binario2 = new ArchivoBinario("binario2.txt");
+            //binario1 = new ArchivoBinario("binario1.txt");
+            //binario2 = new ArchivoBinario("binario2.txt");
 
-            comparaArchivos = new ComparaArchivosBinarios(binario1, binario2); //inicializamos con 2 ficheros por defecto, esto va a cambiar cualdo hayamos obtenido los 2 a procesar
+            comparaArchivos = new ComparaArchivosBinarios(new File("temp1.dat"), new File("temp2.dat"));//inicializamos con 2 ficheros por defecto, esto va a cambiar cualdo hayamos obtenido los 2 a procesar
             archivoSeleccionado = 0;
         } catch (Exception e) {
             edittext_resultadosComparacion.setText("Error al crear los archivos");
@@ -129,7 +130,7 @@ public class MainActivity extends Activity implements OnClickListener {
 
                 break;
             case (R.id.boton_buscarBinario1):
-                visualizaToast("Abre fichero1(previamente creado) de " + comparaArchivos.getFichero1().getInfoSD().getRuta() + " ...", 0);
+                //visualizaToast("Abre fichero1(previamente creado) de " + comparaArchivos.getFichero1().getInfoSD().getRuta() + " ...", 0);
 
                 archivoSeleccionado = 1; //indicamos que seleccionamos el fichero1
                 /*
@@ -147,7 +148,7 @@ public class MainActivity extends Activity implements OnClickListener {
                 break;
 
             case (R.id.boton_buscarBinario2):
-                visualizaToast("Abre fichero2(previamente creado) de " + comparaArchivos.getFichero1().getInfoSD().getRuta() + " ...", 0);
+                //visualizaToast("Abre fichero2(previamente creado) de " + comparaArchivos.getFichero1().getInfoSD().getRuta() + " ...", 0);
 
                 archivoSeleccionado = 2; //indicamos que seleccionamos el fichero2
                 /*
@@ -176,6 +177,21 @@ public class MainActivity extends Activity implements OnClickListener {
                     return;
                 }
 
+                try {
+
+                    String rutaFile1 = editText_nombreBinario1.getText().toString();
+                    String rutaFile2 = editText_nombreBinario2.getText().toString();
+
+                    ArchivoBinario fichero1 = new ArchivoBinario(rutaFile1);
+                    ArchivoBinario fichero2 = new ArchivoBinario(rutaFile2);
+
+                    //comparaArchivos = new ComparaArchivosBinarios(fichero1, fichero2);
+                    //comparaArchivos.setFichero1(new ArchivoBinario(fichero1.getName()));
+                    //comparaArchivos.setFichero2(new ArchivoBinario(fichero2.getName()));
+                    //visualizaToast("Tam fichero1: " + fichero1.getTamañoArchivo() + "\nTam fichero2: " + fichero2.getTamañoArchivo(), RESULT_OK);
+                } catch (Exception e) {
+                }
+
                 //si todo bien, mandamos a calcular y visualizar
                 edittext_resultadosComparacion.setText(""); //limpiamos
                 String resultadoComparacion = "";
@@ -188,7 +204,7 @@ public class MainActivity extends Activity implements OnClickListener {
 
                 break;
 
-        }
+        }//fin switch()
     }//fin onClick()
 
     /**
@@ -276,90 +292,35 @@ public class MainActivity extends Activity implements OnClickListener {
             if (archivoSeleccionado == 1) {
                 editText_nombreBinario1.setText(data.getDataString());
                 editText_nombreBinario1.requestFocus();
+
+                try {
+                    File fichero1 = new File(data.getDataString());
+
+                    comparaArchivos.setFichero1(fichero1); //AQUÍ ES CUANDO PIERDE TODA LA INFO DEL FICHERO
+                    //visualizaToast("Ya reinicializamos fichero1\nTiene tamaño: " + comparaArchivos.getFichero1().getTamañoArchivo()
+                    //        + "\nElementos: " + comparaArchivos.getFichero1().leerFichero(), 1);
+                } catch (FileNotFoundException ex) {
+
+                    visualizaToast("Error al reinicializar fichero1 -> " + ex.getMessage(), 1);
+
+                }
+
             } else {
                 editText_nombreBinario2.setText(data.getDataString());
-                editText_nombreBinario1.requestFocus();
+                editText_nombreBinario2.requestFocus();
+
+                try {
+                    File fichero2 = new File(data.getDataString());
+                    comparaArchivos.setFichero2(new ArchivoBinario(data.getDataString()));
+                    comparaArchivos.setFichero2(fichero2);
+                    //visualizaToast("Ya reinicializamos fichero2\nTiene tamaño: " + comparaArchivos.getFichero2().getTamañoArchivo()
+                    //        + "\nElementos: " + comparaArchivos.getFichero2().leerFichero(), 1);
+                } catch (FileNotFoundException ex) {
+                    visualizaToast("Error al reinicializar fichero2 -> " + ex.getMessage(), 1);
+                }
             }
 
         }
     }//fin onActivityResult
 
 }//fin class
-
-/**
- * OLD ONCLICK
- *
- * @Override public void onClick(View v) {
- *
- * String contenidoFichero = "";
- *
- * switch (v.getId()) { //----->ESTOS SON LOS CASOS QUE NOS INTERESAN <------
- * case (R.id.leersd): //leer SD
- *
- * textView.setText("");
- *
- * {
- * try {
- * contenidoFichero = comparaArchivos.getFichero1().leerFichero();
- * } catch (FileNotFoundException ex) {
- * Logger.getLogger(MainActivity.class.getName()).log(Level.SEVERE, null, ex);
- * }
- * }
- *
- * if (contenidoFichero.isEmpty() || contenidoFichero.equalsIgnoreCase("")) {
- * contenidoFichero = "Fichero vacío, primero escribe en él. ";
- * }
- *
- * textView.setText(contenidoFichero);
- * Toast.makeText(this, "Se ha leído el fichero", Toast.LENGTH_SHORT).show();
- *
- * break;
- *
- * case (R.id.escribirsd): //Escribir en SD.
- * textView.setText("");
- *
- * {
- * try {
- * contenidoFichero = comparaArchivos.getFichero2().leerFichero();
- * } catch (FileNotFoundException ex) {
- * Logger.getLogger(MainActivity.class.getName()).log(Level.SEVERE, null, ex);
- * }
- * }
- *
- * if (contenidoFichero.isEmpty() || contenidoFichero.equalsIgnoreCase("")) {
- * contenidoFichero = "Fichero vacío, primero escribe en él. ";
- * }
- *
- * textView.setText(contenidoFichero);
- * Toast.makeText(this, "Se ha leído el fichero", Toast.LENGTH_SHORT).show();
- * /*
- * textView.setText("");
- * comparaArchivos.getFichero1().llenaAleatorio(100); //llenamos con 10 int aleatorios
- * Toast.makeText(this, "Se ha llenado el fichero con 10 enteros ", Toast.LENGTH_SHORT).show();
- *
- * break;
- *
- * case (R.id.boton_comparaArchivosBinarios): //Comparamos ficheros actuales      *
- * boolean ficherosIguales = false;
- * try {
- * ficherosIguales = comparaArchivos.sonIguales();
- * } catch (FileNotFoundException ex) {
- * Log.v(TAG, "Error al comparar ficheros");
- * }
- *
- * if (ficherosIguales == true) {
- * Toast.makeText(this, "Los ficheros binarios --> SON IGUALES",
- * Toast.LENGTH_SHORT).show(); } else { Toast.makeText(this, "Los ficheros
- * binarios --> SON DIFERENTES", Toast.LENGTH_SHORT).show(); }
- *
- * Intent intento = new Intent(this, Activity_SeleccionaFichero.class);
- *
- * //ENVIAR INFO AL OTRO ACTIVITY //id, variable_a_enviar
- * //intento.putExtra(Activity_SeleccionaFichero.datoExtra, nombre);
- * startActivity(intento); Toast.makeText(this, "Abre un archivo .txt",
- * Toast.LENGTH_SHORT).show(); break;
- *
- * }//fin switch
- *
- * }//fin onClick
- */

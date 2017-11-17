@@ -24,7 +24,7 @@
     <string name="boton_buscar">Abrir de SD...</string>
     <string name="boton_buscar2">Abrir de SD...</string>
     <string name="boton_crear">Crear binarios</string>
-    <string name="boton_creaFichero">Crear!!!</string>
+    <string name="boton_creaFichero">Crear con enteros aleatorios</string>
     <string name="boton_modificar">Modificar binarios</string>
     <string name="boton_comparar">Comparar archivos actuales</string>
     

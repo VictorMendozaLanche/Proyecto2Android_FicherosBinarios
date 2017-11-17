@@ -7,9 +7,9 @@ se pueda visualizar todo el calendario(sólo tiene que encerrar a todos los elem
     android:layout_height="fill_parent"
 >
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="fill_parent"
-              android:layout_height="fill_parent">
+                  android:orientation="vertical"
+                  android:layout_width="fill_parent"
+                  android:layout_height="fill_parent">
 
         <LinearLayout
             android:orientation="vertical"
@@ -40,21 +40,7 @@ se pueda visualizar todo el calendario(sólo tiene que encerrar a todos los elem
                 android:layout_width="fill_parent" 
                 android:layout_height="wrap_content" 
                 android:text=""
-            />
-        
-            <TextView
-                android:id="@+id/textView_mensaje22"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/TextColor"
-                android:text="@string/mensaje43"/>
-        
-            <!--Aquí se imprimirá el nombre del fichero1-->
-            <EditText
-                android:id="@+id/edittext_datosArchivo"
-                android:layout_width="fill_parent" 
-                android:layout_height="wrap_content" 
-                android:text=""
+                android:hint="Archivo.txt"
             />
         
             <!--botón que manda a crear fichero-->       
@@ -65,14 +51,32 @@ se pueda visualizar todo el calendario(sólo tiene que encerrar a todos los elem
                 android:text="@string/boton_creaFichero"
             />
         
-        
-            <!--Muestra mensaje1 --> 
+            <!--Muestra resultados de creación de ficheross --> 
             <TextView
                 android:id="@+id/textView_resultadosCrear"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/TextColor2"
                 android:text=""/>
+            
+            <!--Temporalmente ocultamos los controles para agregar elementos-->
+            <TextView
+                android:id="@+id/textView_mensaje22"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/TextColor"
+                android:text="@string/mensaje43"
+                android:visibility="invisible"
+            />
+        
+            <!--Aquí se imprimirá el nombre del fichero1-->
+            <EditText
+                android:id="@+id/edittext_datosArchivo"
+                android:layout_width="fill_parent" 
+                android:layout_height="wrap_content" 
+                android:text=""
+                android:visibility="invisible"
+            />
         
        
         
