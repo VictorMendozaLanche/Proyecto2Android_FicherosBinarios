@@ -10,15 +10,10 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
-import archivosBinariosAndroid.ArchivoBinario;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class Activity_SeleccionaFichero extends ListActivity {
 
@@ -30,16 +25,18 @@ public class Activity_SeleccionaFichero extends ListActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_files);
 
-        // Use the current directory as title
+        //Apuntamos a path de la SD
         ruta = Environment.getExternalStorageDirectory();
         path = ruta.getAbsolutePath();
 
         if (getIntent().hasExtra("path")) {
             path = getIntent().getStringExtra("path");
         }
+
+        //Ponemos de título de path actual
         setTitle(path);
 
-        // Read all files sorted into the values-array
+        //Lee todos los archivos del directorio actual y los ordena
         List values = new ArrayList();
         File dir = new File(path);
         if (!dir.canRead()) {
@@ -53,54 +50,45 @@ public class Activity_SeleccionaFichero extends ListActivity {
                 }
             }
         }
+
+        //Ordena los archivos/directorios de la path actual
         Collections.sort(values);
 
-        // Put the data into the list
+        //Visualizamos elementos en la lista
         ArrayAdapter adapter = new ArrayAdapter(this,
                 android.R.layout.simple_list_item_2, android.R.id.text1, values);
         setListAdapter(adapter);
     }
 
+    /**
+     * Método que maneja evento de dar clic sobre un elemento.
+     */
     @Override
     protected void onListItemClick(ListView l, View v, int position, long id) {
+
+        //Obtiene el nombre del item seleccionado
         String filename = (String) getListAdapter().getItem(position);
+
+        //Maneja separador adecuado
         if (path.endsWith(File.separator)) {
             filename = path + filename;
         } else {
             filename = path + File.separator + filename;
         }
-        if (new File(filename).isDirectory()) { //si es un directorio
+
+        //Checa si es un directorio o un archivo
+        if (new File(filename).isDirectory()) { //si es un directorio...
             //volvemos a mandar al mismo view pero ahora abriendo la carpeta o directorio seleccionado
             Intent intent = new Intent(this, Activity_SeleccionaFichero.class);
             intent.putExtra("path", filename);
             startActivity(intent);
-
-            Toast.makeText(this, filename + " es un directorio, debes seleccionar un archivo(.txt o .dat) ", Toast.LENGTH_SHORT).show();
-        } else {
-            File fichero1 = new File(filename);
-            //Toast.makeText(this, "Tamaño fichero1: " + fichero1.length(), 1).show();
+            Toast.makeText(this, filename + " es un directorio, ¡Debes seleccionar un archivo(.txt o .dat)!", Toast.LENGTH_SHORT).show();
+        } else { //si es un archivo
+            //Devolvemos el filename(ruta completa del archivo) a MainActivity 
             Intent data = new Intent();
             data.setData(Uri.parse(filename));
             setResult(RESULT_OK, data);
             finish();
-
         }
-    }
+    }//fin onListItemClick()
 }
-
-/*
- /*
- 3. Cuando pulsemos sobre un elemento, se va a crear un Intent,
- el cual tendrá el String que hemos seleccionado.
- Una vez esté cargado, vamos a llamar al método setResult(), 
- el cual tiene la constante RESULT_OK, es decir, que el resultado que enviamos es correcto. 
- Si por el contrario quisieramos retroceder a la actividad anterior sin enviar nada, podríamos establecer RESULT_CANCELLED. 
- Como segundo argumento, recibe el Intent con los datos que hemos cargado en el. Una vez hecho esto, llamamos al método finish(),
- el cual finalizará la actividad y volverá a la primera actividad.
-             
- String nombreArchivo = filename; //Obtenemos el nombre del archivo archivo seleccionamos
- Intent data = new Intent(); //Creamos el intent
- data.setData(Uri.parse(nombreArchivo)); //establecemos el dato a devolver
- setResult(RESULT_OK, data); //devolvemos
- finish();
- */

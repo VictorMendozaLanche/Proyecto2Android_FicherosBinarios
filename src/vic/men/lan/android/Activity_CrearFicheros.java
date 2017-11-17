@@ -44,6 +44,9 @@ public class Activity_CrearFicheros extends Activity implements View.OnClickList
         //-->Escucha a botones
         boton_creaFichero.setOnClickListener(this);
 
+        //-->Limpiamos mensajes 
+        textView_resultadosCrear.setText("");
+
     }//fin onCreate
 
     //-->Maneja eventos onClick de los controles
@@ -60,7 +63,7 @@ public class Activity_CrearFicheros extends Activity implements View.OnClickList
                 if (nombre.isEmpty()) {
                     visualizaToast("¡Debes ingresar nombre del archivo!\nCon el formato -> nombreArchivo.txt o nombreArchivo.dat", 1);
                     edittext_nombreArchivo.requestFocus(); //manda el foco al control ingresa nombre
-                    textView_resultadosCrear.setText("Error: Debes ingresar un nombre del fichero!!!!");
+                    textView_resultadosCrear.append("\n\n-->Error: Debes ingresar un nombre del fichero!!!!\n\n");
                     return; //rompemos flujo
                 }
 
@@ -76,9 +79,16 @@ public class Activity_CrearFicheros extends Activity implements View.OnClickList
                     Logger.getLogger(Activity_CrearFicheros.class.getName()).log(Level.SEVERE, null, ex);
                 }
 
-                textView_resultadosCrear.setText("Se ha creado correctamente el archivo " + nombre + " ve a visualizarlo...");
-                visualizaToast("Se ha creado correctamente el archivo " + nombre + " ve a visualizarlo y/o compararlo", 0);
+                //Visualizamos resultados
+                try {
+                    textView_resultadosCrear.append("\n\nSe creó el archivo --> " + manejaBinarios.getArchivo().getName()
+                            + "\nRuta -->" + manejaBinarios.getAbsolutePath()
+                            + "\nDatos --> " + manejaBinarios.leerFichero());
+                } catch (FileNotFoundException ex) {
+                    textView_resultadosCrear.setText("Error al tratar de mostrar resultados de crear...");
+                }
 
+                //visualizaToast("Se ha creado correctamente el archivo " + nombre + " ve a visualizarlo y/o compararlo", 0);
                 break;
 
         }//fin switch
